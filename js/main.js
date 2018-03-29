@@ -7,7 +7,7 @@ const template = document.querySelector(`template`);
 const markup = template.content.cloneNode(true);
 const screens = markup.querySelectorAll(`.main`);
 const container = document.querySelector(`.main`);
-const lastScreenIndex = screens.length;
+const lastScreenIndex = screens.length - 1;
 
 let currentScreenIndex = 0;
 
@@ -16,36 +16,24 @@ const showScreen = (index) => {
   container.appendChild(screens[index]);
 };
 
-const setCurrentScreenIndex = (next) => {
-  const previousScreenIndex = currentScreenIndex;
-
-  if (next) {
-    currentScreenIndex++;
-  } else {
-    currentScreenIndex--;
-  }
-
-  if (currentScreenIndex < 0 || currentScreenIndex >= lastScreenIndex) {
-    currentScreenIndex = previousScreenIndex;
-    return currentScreenIndex;
-  }
-
-  return currentScreenIndex;
+const shouldNextScreenShow = (evt) => {
+  return evt.keyCode === Keycode.ARROW_RIGHT && currentScreenIndex < lastScreenIndex;
 };
 
+const shouldPreviousScreenShow = (evt) => evt.keyCode === Keycode.ARROW_LEFT && currentScreenIndex > 0;
 
 const documentKeydownHandler = (evt) => {
   if (!evt.altKey) {
     return;
   }
 
-  if (evt.keyCode === Keycode.ARROW_RIGHT) {
-    setCurrentScreenIndex(true);
+  if (shouldNextScreenShow(evt)) {
+    currentScreenIndex++;
     showScreen(currentScreenIndex);
   }
 
-  if (evt.keyCode === Keycode.ARROW_LEFT) {
-    setCurrentScreenIndex(false);
+  if (shouldPreviousScreenShow(evt)) {
+    currentScreenIndex--;
     showScreen(currentScreenIndex);
   }
 };
