@@ -1,5 +1,4 @@
-import {getElementFromTemplate} from '../utils';
-import {showScreen} from '../utils';
+import {getElementFromTemplate, showScreen} from '../utils';
 import artistScreen from './artist';
 
 const html = `

@@ -1,5 +1,4 @@
-import {getElementFromTemplate} from '../utils';
-import {showScreen, randomInteger} from '../utils';
+import {getElementFromTemplate, showScreen, randomInteger} from '../utils';
 import winnerScreen from './winner-result';
 import liveEndResultScreen from './live-end-result';
 import timeEndResultScreen from './time-end-result';
